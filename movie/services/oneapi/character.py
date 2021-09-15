@@ -1,14 +1,14 @@
 import requests
-from oneapi import OneApiRequestProcessor
+from movie.services.oneapi import OneApiRequestProcessor
 
 from utils.exceptions import ServiceUnavailable
 
 
-class Character(OneApiRequestProcessor):
+class CharacterProcessor(OneApiRequestProcessor):
 
     def process_request(self):
-        url = self.base_url + "/characters"
-        response = requests.get(url)
+        url = self.base_url + "/character"
+        response = requests.get(url, headers=self.headers)
         if response.status_code == 200:
             return response.json()
 
