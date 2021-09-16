@@ -1,7 +1,7 @@
 from django.core.management.base import BaseCommand
 from django.db import transaction
 from movie.models import Character
-from movie.services.oneapi import CharacterProcessor
+from movie.services.oneapi.character import CharacterProcessor
 
 
 class Command(BaseCommand):

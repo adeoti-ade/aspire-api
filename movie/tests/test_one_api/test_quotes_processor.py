@@ -3,7 +3,6 @@ from django.test import TestCase
 from movie.services.oneapi.quotes import QuotesProcessor
 
 
-
 class QuoteProcessorTestCase(TestCase):
     def setUp(self):
         self.quote_processor = QuotesProcessor()

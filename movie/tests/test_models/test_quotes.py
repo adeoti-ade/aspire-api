@@ -3,34 +3,25 @@ from django.db.utils import IntegrityError
 
 from movie.models import Quote, Character
 from data.character import data as character_data
+from data.quotes import data as quote_data
 
 
-class CharacterModelTestCase(TestCase):
+class QuoteModelTestCase(TestCase):
     def setUp(self):
-        self.data = [
-            {
-                "_id": "5cd96e05de30eff6ebccf13f",
-                "dialog": "One thing I've learnt about Hobbits: They are a most hardy folk.",
-            },
-            {
-                "_id": "5cd96e05de30eff6ebccf140",
-                "dialog": "Foolhardy maybe. He's a Took!",
-            }
-        ]
+        self.data = quote_data
 
     def test_create_quotes_no_character(self):
-        quote_objects = [Quote(**obj) for obj in self.data]
+        quotes_without_characters = []
+        for obj in self.data:
+            obj.pop("character")
+            quotes_without_characters.append(obj)
+        quote_objects = [Quote(**obj) for obj in quotes_without_characters]
         with self.assertRaises(IntegrityError):
             Quote.objects.bulk_create(quote_objects)
 
     def test_create_quotes_success(self):
-        # character_objects = [Character(**obj) for obj in self.data]
-        Character.objects.create(**character_data[0])
-        retrieved_character = Character.objects.get(_id="5cd99d4bde30eff6ebccfbbe")
+        character = character_data[0]
+        Character.objects.create(**character)
+        retrieved_character = Character.objects.get(_id=character.get("_id"))
         self.assertEqual(type(retrieved_character), Character)
-    #
-    # def test_get_character_by_id_from_oneapi_not_found(self):
-    #     character_objects = [Character(**obj) for obj in self.data]
-    #     Character.objects.bulk_create(character_objects)
-    #     with self.assertRaises(Character.DoesNotExist):
-    #         Character.objects.get(_id="5cd99d4bde30eff6ebccf")
+
