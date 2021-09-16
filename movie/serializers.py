@@ -1,4 +1,3 @@
-
 from movie.models import FavouriteQuote, Quote, Character, FavouriteCharacter
 
 from rest_framework import serializers
@@ -28,6 +27,7 @@ class CharacterSerializer(BaseModelSerializer):
 
 class QuoteSerializer(BaseModelSerializer):
     character = CharacterSerializer(read_only=True)
+
     class Meta:
         model = Quote
         fields = "__all__"
