@@ -8,7 +8,7 @@ router.register(r'character', views.CharacterViewSet)
 app_name = 'movie'
 
 urlpatterns = [
-
+    path('favorites', views.FavoriteAPIView.as_view())
 ]
 
 urlpatterns += router.urls

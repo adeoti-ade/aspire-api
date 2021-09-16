@@ -1,6 +1,7 @@
 from movie.models import FavouriteQuote, Quote, Character, FavouriteCharacter
 
 from rest_framework import serializers
+from rest_framework.validators import UniqueTogetherValidator
 
 
 class BaseModelSerializer(serializers.ModelSerializer):
@@ -37,9 +38,21 @@ class FavouriteCharacterSerializer(BaseModelSerializer):
     class Meta:
         model = FavouriteCharacter
         fields = "__all__"
+        validators = [
+            UniqueTogetherValidator(
+                queryset=FavouriteCharacter.objects.all(),
+                fields=['user', 'character']
+            )
+        ]
 
 
 class FavouriteQuoteSerializer(BaseModelSerializer):
     class Meta:
         model = FavouriteQuote
         fields = "__all__"
+        validators = [
+            UniqueTogetherValidator(
+                queryset=FavouriteQuote.objects.all(),
+                fields=['user', 'quote']
+            )
+        ]
