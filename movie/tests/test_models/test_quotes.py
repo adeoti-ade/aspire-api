@@ -21,7 +21,7 @@ class QuoteModelTestCase(TestCase):
 
     def test_create_quotes_success(self):
         character = character_data[0]
-        Character.objects.create(**character)
-        retrieved_character = Character.objects.get(_id=character.get("_id"))
-        self.assertEqual(type(retrieved_character), Character)
+        character_qs = Character.objects.create(**character)
+        quote_qs = Quote.objects.create(**quote_data[0], character=character_qs)
+        self.assertEqual(type(quote_qs), Quote)
 
