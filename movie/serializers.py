@@ -22,23 +22,24 @@ class BaseModelSerializer(serializers.ModelSerializer):
 
 class CharacterSerializer(BaseModelSerializer):
     class Meta:
-        models = Character
+        model = Character
         fields = "__all__"
 
 
 class QuoteSerializer(BaseModelSerializer):
+    character = CharacterSerializer(read_only=True)
     class Meta:
-        models = Quote
+        model = Quote
         fields = "__all__"
 
 
 class FavouriteCharacterSerializer(BaseModelSerializer):
     class Meta:
-        models = FavouriteCharacter
+        model = FavouriteCharacter
         fields = "__all__"
 
 
 class FavouriteQuoteSerializer(BaseModelSerializer):
     class Meta:
-        models = FavouriteQuote
+        model = FavouriteQuote
         fields = "__all__"

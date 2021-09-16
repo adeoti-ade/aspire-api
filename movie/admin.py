@@ -1,3 +1,8 @@
 from django.contrib import admin
 
-# Register your models here.
+from movie.models import FavouriteQuote, Quote, Character, FavouriteCharacter
+
+admin.site.register(FavouriteQuote)
+admin.site.register(Quote)
+admin.site.register(Character)
+admin.site.register(FavouriteCharacter)
