@@ -55,6 +55,11 @@ class CharacterViewSet(viewsets.ReadOnlyModelViewSet):
         return Response(favourite_serializer.data)
 
     def validate_quote(self, quotes_id):
+        """
+        validate if the id is a valid quotes quotes_id
+        returns:
+            quote object
+        """
         try:
             quote = Quote.objects.filter(id=quotes_id).first()
         except ValidationError:
