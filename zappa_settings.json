@@ -1,0 +1,10 @@
+{
+    "dev": {
+        "aws_region": "us-west-2",
+        "django_settings": "config.settings.development",
+        "profile_name": "default",
+        "project_name": "aspire-api",
+        "runtime": "python3.8",
+        "s3_bucket": "zappa-kl7o837do"
+    }
+}
