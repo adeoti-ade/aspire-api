@@ -1,5 +1,7 @@
 from django.core.management.base import BaseCommand
 from django.db import transaction
+from movie.models import Character
+from movie.services.oneapi import CharacterProcessor
 
 
 class Command(BaseCommand):
@@ -7,6 +9,10 @@ class Command(BaseCommand):
 
     @transaction.atomic
     def handle(self, *args, **kwargs):
-        # self.stdout.write("deleted all credit card approval limit config objects")
-        # self.stdout.write(f"created {len(seed_data)} credit card approval limit config objects")
-        pass
+        Character.objects.all().delete()
+        self.stdout.write("deleted characters")
+        character_processor = CharacterProcessor()
+        response_data = character_processor.process_characters()
+        character_objects = [Character(**obj) for obj in response_data]
+        Character.objects.bulk_create(character_objects)
+        self.stdout.write(f"created {len(response_data)} characters")
