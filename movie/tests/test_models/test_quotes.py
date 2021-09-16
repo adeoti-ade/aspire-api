@@ -13,7 +13,6 @@ class QuoteModelTestCase(TestCase):
     def test_create_quotes_no_character(self):
         quotes_without_characters = []
         for obj in self.data:
-            obj.pop("character")
             quotes_without_characters.append(obj)
         quote_objects = [Quote(**obj) for obj in quotes_without_characters]
         with self.assertRaises(IntegrityError):
